@@ -1,0 +1,2 @@
+# sploits
+Miscellaneous exploits
