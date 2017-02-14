@@ -118,7 +118,7 @@ if __name__=='__main__':
     ap.add_argument('--payload', '-p', dest='payload', metavar='P', help='Formatted payload')
     
     formats = ['POST','JSON']
-    ap.add_argument('--format', '-f', dest='format', default='POST', metavar='F', help='Format (%s)' % ', '.join(formats))
+    ap.add_argument('--format', '-f', dest='format', default='POST', metavar='F', help='Format (%s), default POST' % ', '.join(formats))
     
     
     ap.add_argument('-v', action='count', dest='verbose', default=0, help='Increase output verbosity')
